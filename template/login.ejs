@@ -1,0 +1,61 @@
+<% layout('layout/page') -%>
+
+  <div class="content-body">
+    <div class="container">
+      <div class="row">
+        <main class="col-md-12">
+          <h1 class="page-title">Log in</h1>
+          <article class="post">
+            <div class="entry-content clearfix">
+              <form action="#" method="post" class="contact-form" name="login-form">
+                <div class="row">
+                  <div class="col-md-6 col-md-offset-3">
+                    <input type="text" name="username"  id="input-username" value="Login" placeholder="Login" required>
+                    <input name="password" value="pass" type="password" id="input-password" placeholder="Password" required>
+                    <button class="btn-send btn-5 btn-5b ion-ios-paperplane" type="submit"  data-loading-text="Sending..."><span>Log in</span></button>
+                    <span class="help-block error"></span>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </article>
+        </main>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<script>
+  $(document.forms['login-form']).on('submit', function() {
+    var form = $(this);
+
+    $('.error', form).html('');
+    $(":submit", form).button("loading");
+
+    $.ajax({
+      url: "/login",
+      method: "POST",
+      data: form.serialize(),
+      complete: function() {
+        $(":submit", form).button("reset");
+      },
+      statusCode: {
+        200: function() {
+          form.html("You are loged in").addClass('alert-success');
+          window.location.href = "/";
+        },
+        403: function(jqXHR) {
+          var error = JSON.parse(jqXHR.responseText);
+          $('.error', form).html(error.message);
+        }
+      }
+    });
+    return false;
+  });
+</script>
+
+
+
+

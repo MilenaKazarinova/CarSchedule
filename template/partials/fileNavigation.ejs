@@ -1,0 +1,15 @@
+
+
+<li ><a href="/">Home</a></li>
+<% if (user) { %>
+<li ><a href="/editUserInfo">Account</a></li>
+<li><a href="/editCarInfo">Car</a></li>
+<li><a href="/search" >List</a></li>
+<li> <a href="/yourCar" >Schedule</a></li>
+<li ><a href="" onclick="$('<form method=POST action=/logout>').submit();return false">Logout</a></form></li>
+<% } else {%>
+<li ><a href="contact.html" >Contact</a></li>
+<li ><a href="/login">Log in</a></li>
+<li ><a href=/signup"">Sign up</a></li>
+<% } %>
+

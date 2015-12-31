@@ -1,0 +1,63 @@
+<% layout('./layout/page') -%>
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-12">
+                <article class="post post-1">
+                    <% if(cars.length > 0){ %>
+                    <% cars.forEach(function(car){ %>
+                            <header class="entry-header">
+                                <div class="entry-meta">
+                                    <span class="post-category"><a>
+                                            Mark:
+                                            <% if (car.mark) { %>
+                                            <%= car.mark%>
+                                            <% } else {%>
+                                            -
+                                            <% }%>
+                                        </a></span>
+                                    <span class="post-author"><a>
+                                               Model:
+                                            <% if (car.model) { %>
+                                            <%= car.model%>
+                                            <% } else {%>
+                                            -
+                                            <% }%>
+                                        </a></span>
+                                    <span class="post-author"><a>
+                                            Class:
+                                            <% if (car.class) { %>
+                                            <%= car.class%>
+                                            <% } else {%>
+                                            -
+                                            <% }%>
+                                        </a></span>
+                                    <span class="comments-link"><a>
+                                            Color:
+                                            <% if (car.color) { %>
+                                            <%= car.color%>
+                                            <% } else {%>
+                                            -
+                                            <% }%>
+                                        </a></span>
+
+                                </div>
+                            </header>
+                        <div class="read-more cl-effect-14">
+                            <a href="/schedule/<%= car._id %>"class="more-link">Select <span class="meta-nav">→</span></a>
+                        </div>
+
+                    <% });  %>
+                    <% }  else {%>
+                    <header class="entry-header">
+                        <h1 class="entry-title">
+                            <p>Cars not found</p>
+                        </h1>
+                    </header>
+                    <% }  %>
+
+                </article>
+            </main>
+        </div>
+    </div>
+</div>

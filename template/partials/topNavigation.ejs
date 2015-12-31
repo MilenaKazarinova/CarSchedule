@@ -1,0 +1,12 @@
+<li class="cl-effect-11"><a href="/" data-hover="Home">Home</a></li>
+<% if (user) { %>
+<li class="cl-effect-11"><a href="/editUserInfo" data-hover="Account">Account</a></li>
+<li class="cl-effect-11"><a href="/editCarInfo" data-hover="Car">Car</a></li>
+<li class="cl-effect-11"><a href="/search" data-hover="List">List</a></li>
+<li class="cl-effect-11"><a href="/yourCar" data-hover="Schedule">Schedule</a></li>
+<li class="cl-effect-11"><a href="" onclick="$('<form method=POST action=/logout>').submit();return false">Logout</a></form></li>
+<% } else {%>
+<li class="cl-effect-11"><a href="contact.html" data-hover="Contact">Contact</a></li>
+<li class="cl-effect-11"><a href="/login">Log in</a></li>
+<li class="cl-effect-11"><a href="/signup">Sign up</a></li>
+<% } %>

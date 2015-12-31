@@ -1,0 +1,65 @@
+<% layout('layout/page') -%>
+
+
+
+    <div class="content-body">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-12">
+                    <h1 class="page-title">Edit user info</h1>
+                    <article class="post">
+                        <div class="entry-content clearfix">
+                            <form action="#" method="post" class="contact-form" name="edit-form">
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <input type="text" name="username"  id="input-username" value="<%= user.get('username')%>" placeholder="Login" required>
+                                        <% if (user.get('fullname')) { %>
+                                        <input name="fullname" value="<%= user.get('fullname')%>" type="text"  id="input-username" placeholder="Full name">
+                                        <% } else {%>
+                                        <input name="fullname" value="" type="text"  id="input-username" placeholder="Full name">
+                                        <% }%>
+                                        <% if (user.get('email')) { %>
+                                        <input name="email" value="<%= user.get('email')%>" type="text" id="input-email" placeholder="E-mail">
+                                        <% } else {%>
+                                        <input name="email" value="" type="text" id="input-email" placeholder="E-mail">
+                                        <% }%>
+                                        <input name="password" value="pass" type="password" id="input-password" placeholder="Password" required>
+                                        <button class="btn-send btn-5 btn-5b ion-ios-paperplane" type="submit"  data-loading-text="Sending..."><span>Save</span></button>
+                                        <span class="help-block error"></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $(document.forms['edit-form']).on('submit', function() {
+        var form = $(this);
+
+        $('.error', form).html('');
+        $(":submit", form).button("loading");
+
+        $.ajax({
+            url: "/editUserInfo",
+            method: "POST",
+            data: form.serialize(),
+            complete: function() {
+                $(":submit", form).button("reset");
+            },
+            statusCode: {
+                200: function() {
+                    window.location.href = "/editUserInfo";
+                },
+                403: function(jqXHR) {
+                    var error = JSON.parse(jqXHR.responseText);
+                    $('.error', form).html(error.message);
+                }
+            }
+        });
+        return false;
+    });
+</script>
